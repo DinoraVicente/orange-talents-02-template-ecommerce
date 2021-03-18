@@ -5,6 +5,7 @@ import br.com.zup.mercadolivre.produtos.caracteristicas.Caracteristica;
 import br.com.zup.mercadolivre.produtos.caracteristicas.CaracteristicaRequest;
 import br.com.zup.mercadolivre.produtos.imagens.ImagensProduto;
 import br.com.zup.mercadolivre.produtos.opniao.Opniao;
+import br.com.zup.mercadolivre.produtos.perguntas.Perguntas;
 import br.com.zup.mercadolivre.usuarios.Usuario;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.util.Assert;
@@ -47,6 +48,8 @@ public class Produto {
     @Valid
     @ManyToOne
     private Usuario dono;
+    @OneToMany(mappedBy = "produto")
+    private List<Perguntas> perguntas = new ArrayList<>();
 
     @Deprecated
     public Produto() {
@@ -106,6 +109,10 @@ public class Produto {
 
     public Usuario getDono() {
         return dono;
+    }
+
+    public List<Perguntas> getPerguntas() {
+        return perguntas;
     }
 
     public void associaImagem(Set<String> links) {

@@ -21,15 +21,39 @@ public class Perguntas {
     @NotNull
     @Valid
     @ManyToOne
-    private Usuario usuario;
+    private Usuario questionador;
     @NotNull
     @Valid
     @ManyToOne
     private Produto produto;
 
-    public Perguntas(@NotBlank String titulo, @NotNull @Valid Usuario usuario, @NotNull @Valid Produto produto) {
+    @Deprecated
+    public Perguntas() {
+    }
+
+    public Perguntas(@NotBlank String titulo, @NotNull @Valid Usuario questionador, @NotNull @Valid Produto produto) {
         this.titulo = titulo;
-        this.usuario = usuario;
+        this.questionador = questionador;
         this.produto = produto;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public LocalDateTime getInstante() {
+        return instante;
+    }
+
+    public Usuario getQuestionador() {
+        return questionador;
+    }
+
+    public Usuario getUsuario() {
+        return questionador;
+    }
+
+    public Usuario getDonoProduto() {
+        return produto.getDono();
     }
 }
