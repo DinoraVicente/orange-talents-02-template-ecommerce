@@ -11,8 +11,8 @@ public class UsuarioRequest {
 
     @Email
     @NotBlank
-    @UnicoValor(domainClass = Usuario.class, fieldName = "login")
-    private String login;
+    @UnicoValor(domainClass = Usuario.class, fieldName = "email")
+    private String email;
     @NotBlank
     @Size(min = 6)
     private String senha;
@@ -22,14 +22,14 @@ public class UsuarioRequest {
     public UsuarioRequest(){
     }
 
-    public UsuarioRequest(@Email @NotBlank String login,
+    public UsuarioRequest(@Email @NotBlank String email,
                           @NotBlank @Size(min = 6) String senha) {
-        this.login = login;
+        this.email = email;
         this.senha = senha;
     }
 
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
     public String getSenha() {
@@ -41,6 +41,6 @@ public class UsuarioRequest {
     }
 
     public Usuario toModel() {
-        return new Usuario(login, new SenhaLimpa(senha), instanteCriacao);
+        return new Usuario(email, new SenhaLimpa(senha), instanteCriacao);
     }
 }
