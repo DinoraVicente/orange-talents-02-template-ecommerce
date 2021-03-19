@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.SortedSet;
 import java.util.stream.Collectors;
 
 @RestController
@@ -35,7 +36,7 @@ public class PerguntasController {
 
         emails.novaPergunta(perguntas);
 
-        List<Perguntas> lista = produto.getPerguntas();
+        SortedSet<Perguntas> lista = produto.getPerguntas();
         return lista.stream().map(ListaPerguntasRequest::new).collect(Collectors.toList());
     }
 }

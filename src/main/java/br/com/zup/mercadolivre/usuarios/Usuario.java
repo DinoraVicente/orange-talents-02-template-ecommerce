@@ -1,5 +1,6 @@
 package br.com.zup.mercadolivre.usuarios;
 
+import br.com.zup.mercadolivre.produtos.perguntas.Perguntas;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
@@ -76,11 +77,20 @@ public class Usuario implements UserDetails{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Usuario usuario = (Usuario) o;
-        return Objects.equals(id, usuario.id) && Objects.equals(email, usuario.email) && Objects.equals(senha, usuario.senha) && Objects.equals(instanteCriacao, usuario.instanteCriacao);
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Usuario other = (Usuario) obj;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        } else if (!email.equals(other.email))
+            return false;
+        return true;
     }
 
     @Override

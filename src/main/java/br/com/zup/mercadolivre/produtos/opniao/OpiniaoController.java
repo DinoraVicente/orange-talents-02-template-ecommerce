@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api/produto")
-public class OpniaoController {
+public class OpiniaoController {
 
     @PersistenceContext
     private EntityManager manager;
@@ -21,11 +21,11 @@ public class OpniaoController {
     @PostMapping(value = "/{id}/opniao")
     @Transactional
     public ResponseEntity<?> cadastraOpniao(@AuthenticationPrincipal Usuario usuario,
-                                         @PathVariable("id") Long id, @RequestBody @Valid OpniaoRequest request){
+                                         @PathVariable("id") Long id, @RequestBody @Valid OpiniaoRequest request){
 
         Usuario dono = usuario.get();
         Produto produto = manager.find(Produto.class, id);
-        Opniao opniao = request.toModel(dono, produto);
+        Opiniao opniao = request.toModel(dono, produto);
 
         manager.persist(opniao);
 

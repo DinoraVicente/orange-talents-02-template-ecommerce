@@ -3,8 +3,6 @@ package br.com.zup.mercadolivre.produtos;
 import br.com.zup.mercadolivre.produtos.caracteristicas.CaracteristicaNomeIgualValidator;
 import br.com.zup.mercadolivre.produtos.imagens.ImagensRequest;
 import br.com.zup.mercadolivre.produtos.imagens.UploadFile;
-import br.com.zup.mercadolivre.produtos.opniao.Opniao;
-import br.com.zup.mercadolivre.produtos.opniao.OpniaoRequest;
 import br.com.zup.mercadolivre.usuarios.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

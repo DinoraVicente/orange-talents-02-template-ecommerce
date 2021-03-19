@@ -4,7 +4,8 @@ import br.com.zup.mercadolivre.categorias.Categoria;
 import br.com.zup.mercadolivre.produtos.caracteristicas.Caracteristica;
 import br.com.zup.mercadolivre.produtos.caracteristicas.CaracteristicaRequest;
 import br.com.zup.mercadolivre.produtos.imagens.ImagensProduto;
-import br.com.zup.mercadolivre.produtos.opniao.Opniao;
+import br.com.zup.mercadolivre.produtos.opniao.Opiniao;
+import br.com.zup.mercadolivre.produtos.opniao.Opinioes;
 import br.com.zup.mercadolivre.produtos.perguntas.Perguntas;
 import br.com.zup.mercadolivre.usuarios.Usuario;
 import org.hibernate.validator.constraints.Length;
@@ -16,6 +17,7 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Entity
@@ -49,7 +51,10 @@ public class Produto {
     @ManyToOne
     private Usuario dono;
     @OneToMany(mappedBy = "produto")
-    private List<Perguntas> perguntas = new ArrayList<>();
+    @OrderBy("titulo asc")
+    private SortedSet<Perguntas> perguntas = new TreeSet<>();
+    @OneToMany(mappedBy = "produto")
+    private Set<Opiniao> opinioes = new HashSet<>();
 
     @Deprecated
     public Produto() {
@@ -111,8 +116,12 @@ public class Produto {
         return dono;
     }
 
-    public List<Perguntas> getPerguntas() {
+    public SortedSet<Perguntas> getPerguntas() {
         return perguntas;
+    }
+
+    public Set<ImagensProduto> getImagens() {
+        return imagens;
     }
 
     public void associaImagem(Set<String> links) {
@@ -123,5 +132,17 @@ public class Produto {
 
     public boolean pertenceAoUsuario(Usuario usuario) {
         return this.dono.equals(usuario);
+    }
+
+    public <T> Set<T> mapeiaImagens(Function<ImagensProduto, T> funcaoMapeadora){
+        return this.imagens.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+
+    public <T extends Comparable<T>> SortedSet<T> mapeiaPerguntas(Function<Perguntas, T> funcaoMapeadora){
+        return this.perguntas.stream().map(funcaoMapeadora).collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    public Opinioes getOpinioes() {
+        return new Opinioes(this.opinioes);
     }
 }
