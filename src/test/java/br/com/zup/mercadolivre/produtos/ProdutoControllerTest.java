@@ -16,8 +16,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-
 @Profile("test")
 class ProdutoControllerTest {
 
@@ -44,6 +42,4 @@ class ProdutoControllerTest {
                                 new CaracteristicaRequest("bla5", "blaa5"),
                                 new CaracteristicaRequest("bla6", "blaa6"))));
     }
-
-
 }
