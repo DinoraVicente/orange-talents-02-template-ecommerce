@@ -44,6 +44,10 @@ public class Transacao {
         return instante;
     }
 
+    public Compra getCompra() {
+        return compra;
+    }
+
     public boolean concluidaComSucesso(){
         return this.status.equals(StatusTransacao.sucesso);
     }

@@ -21,4 +21,12 @@ public class RankingRequest {
     public Long getIdDonoProduto() {
         return idDonoProduto;
     }
+
+    @Override
+    public String toString() {
+        return "RankingRequest{" +
+                "idCompra=" + idCompra +
+                ", idDonoProduto=" + idDonoProduto +
+                '}';
+    }
 }

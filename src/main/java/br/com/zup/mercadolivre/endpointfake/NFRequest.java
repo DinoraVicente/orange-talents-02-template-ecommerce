@@ -21,4 +21,12 @@ public class NFRequest {
     public Long getIdComprador() {
         return idComprador;
     }
+
+    @Override
+    public String toString() {
+        return "NFRequest{" +
+                "idCompra=" + idCompra +
+                ", idComprador=" + idComprador +
+                '}';
+    }
 }

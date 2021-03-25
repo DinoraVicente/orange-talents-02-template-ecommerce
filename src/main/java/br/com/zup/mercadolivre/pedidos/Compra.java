@@ -1,6 +1,5 @@
 package br.com.zup.mercadolivre.pedidos;
 
-import br.com.zup.mercadolivre.pedidos.pagseguro.RetornoPagSeguroRequest;
 import br.com.zup.mercadolivre.produtos.Produto;
 import br.com.zup.mercadolivre.usuarios.Usuario;
 import org.springframework.util.Assert;
@@ -21,9 +20,10 @@ public class Compra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Positive
-    private Integer quantidade;
+    private int quantidade;
     @ManyToOne
     @NotNull
+    @JoinColumn(name = "comprador_id")
     @Valid
     private Usuario comprador;
     @ManyToOne
@@ -62,6 +62,10 @@ public class Compra {
 
     public Produto getProduto() {
         return produto;
+    }
+
+    public Usuario getDonoProduto() {
+        return this.produto.getDono();
     }
 
     public GatewayPagamento getGateway() {
@@ -109,9 +113,5 @@ public class Compra {
                 ", gateway=" + gateway +
                 ", transacoes=" + transacoes +
                 '}';
-    }
-
-    public Usuario getDonoProduto() {
-        return this.produto.getDono();
     }
 }

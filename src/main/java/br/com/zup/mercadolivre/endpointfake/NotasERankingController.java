@@ -14,10 +14,10 @@ public class NotasERankingController {
         System.out.println("Criando nota para " + request.getIdCompra() + " do comprador " + request.getIdComprador());
         Thread.sleep(150);
     }
-//
-//    @PostMapping("/ranking")
-//    public void rankingVendedores(@Valid @RequestBody RankingRequest request) throws InterruptedException{
-//        System.out.println("Criando nota para " + request.getIdCompra() + " do comprador " + request.getIdComprador());
-//        Thread.sleep(150);
-//    }
+
+    @PostMapping("/ranking")
+    public void rankingVendedores(@Valid @RequestBody RankingRequest request) throws InterruptedException{
+        System.out.println("Criando nota para " + request.getIdCompra() + " do comprador " + request.getIdDonoProduto());
+        Thread.sleep(150);
+    }
 }

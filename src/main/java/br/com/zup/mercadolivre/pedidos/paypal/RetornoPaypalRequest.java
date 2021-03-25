@@ -12,12 +12,12 @@ import javax.validation.constraints.NotNull;
 
 public class RetornoPaypalRequest implements RetornoGatewayPagamento {
 
-    @NotBlank
-    private String idTransacao;
     @Min(0)
     @Max(1)
-    @NotNull
     private int status;
+    @NotBlank
+    private String idTransacao;
+
 
     @Deprecated
     public RetornoPaypalRequest() {
