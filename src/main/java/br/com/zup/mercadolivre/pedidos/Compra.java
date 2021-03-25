@@ -78,14 +78,25 @@ public class Compra {
         }
     }
 
-    public void addTransacao(@Valid RetornoPagSeguroRequest request) {
+    public void addTransacao(@Valid RetornoGatewayPagamento request) {
         Transacao novaTransacao = request.toTransacao(this);
+
         Assert.isTrue(!this.transacoes.contains(novaTransacao), "Já existe uma transação igual a essa");
+        Assert.isTrue(transacoesConcluidas().isEmpty(), "Essa compra já foi concluída com sucesso!");
+
+        this.transacoes.add(novaTransacao);
+    }
+
+    private Set<Transacao> transacoesConcluidas() {
         Set<Transacao> transacoesConcluidas = this.transacoes.stream()
                                             .filter(Transacao::concluidaComSucesso)
                                             .collect(Collectors.toSet());
-        Assert.isTrue(transacoesConcluidas.isEmpty(), "Essa compra já foi concluída com sucesso!");
-        this.transacoes.add(novaTransacao);
+        Assert.isTrue(transacoesConcluidas.size() <= 1, "Mais de uma transação concluída!");
+        return transacoesConcluidas;
+    }
+
+    public boolean processadaComSucesso() {
+        return !transacoesConcluidas().isEmpty();
     }
 
     @Override
@@ -98,5 +109,9 @@ public class Compra {
                 ", gateway=" + gateway +
                 ", transacoes=" + transacoes +
                 '}';
+    }
+
+    public Usuario getDonoProduto() {
+        return this.produto.getDono();
     }
 }

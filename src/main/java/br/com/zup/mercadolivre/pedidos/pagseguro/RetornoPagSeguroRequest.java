@@ -1,12 +1,13 @@
 package br.com.zup.mercadolivre.pedidos.pagseguro;
 
 import br.com.zup.mercadolivre.pedidos.Compra;
+import br.com.zup.mercadolivre.pedidos.RetornoGatewayPagamento;
 import br.com.zup.mercadolivre.pedidos.Transacao;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class RetornoPagSeguroRequest {
+public class RetornoPagSeguroRequest implements RetornoGatewayPagamento {
 
     @NotBlank
     private String idTransacao;
