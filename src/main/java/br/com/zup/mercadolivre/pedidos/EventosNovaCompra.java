@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class EventosNovaCompra {
+public class EventosNovaCompra implements EventoCompraSucesso{
 
     @Autowired
     private Set<EventoCompraSucesso> eventoCompraSucessos;
@@ -24,6 +24,7 @@ public class EventosNovaCompra {
         this.email = email;
     }
 
+    @Override
     public void processa(Compra compra) {
         if(compra.processadaComSucesso()){
             eventoCompraSucessos.forEach(evento -> evento.processa(compra));
